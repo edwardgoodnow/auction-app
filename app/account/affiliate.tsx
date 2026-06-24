@@ -84,6 +84,7 @@ export default function Affiliate() {
               })
             });
 
+            document.querySelector('body').classList.add('account');
       });
     });
   },[]);

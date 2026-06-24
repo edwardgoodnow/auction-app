@@ -12,9 +12,12 @@ import {SERVER, TEMPLATE, SUB_TEMPLATE} from "../constants";
 
 export default function NewsLetter() {
  useEffect(()=> {
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
   publicIP()
     .then(ip => {
-        fetch(`${SERVER}` + '/api/session/account/newsletter/?ip=' +ip, {
+        fetch(`${SERVER}` + '/api/session/account/newsletter/?ip=' + ip + (urlParams.get('msg') !== null?'&msg=' + urlParams.get('msg'):''), {
             "method": 'GET',
             "credentials": 'include'
         })
@@ -82,11 +85,23 @@ export default function NewsLetter() {
             css.href = `${SERVER}` + '/assets/css/maps.css';
             document.body.appendChild(css);
             document.querySelectorAll('#contentSection form').forEach(f => {
+              f.insertAdjacentHTML('beforeend', '<input type="hidden" name="api" value="1" />');
               f.addEventListener('submit', function (ev) {
                 ev.preventDefault();
-              })
+                  var data = new FormData(this);
+                  fetch(`${SERVER}` + this.getAttribute('action'), {
+                    method: this.getAttribute('method'),
+                    body: data,
+                    credentials: 'include'
+                  })
+                  .then(response => response.json())
+                  .then(response => {
+                    if (response.msg)
+                      window.location.href = '/account/newsletter?msg=' + response.msg;
+                  });
+              });
             });
-
+          document.querySelector('body').classList.add('account');
       });
     });
   },[]);

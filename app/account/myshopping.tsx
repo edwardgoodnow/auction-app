@@ -86,6 +86,8 @@ export default function MyShopping() {
               ev.preventDefault();
             })
           });
+
+          document.querySelector('body').classList.add('account');
       });
     });
   },[]);

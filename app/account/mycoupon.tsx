@@ -88,6 +88,7 @@ export default function MyCoupon() {
               })
             });
 
+            document.querySelector('body').classList.add('account');
       });
     });
   },[]);

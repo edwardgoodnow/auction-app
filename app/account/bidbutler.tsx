@@ -78,6 +78,7 @@ export default function BidButler() {
             css.href = `${SERVER}` + '/assets/css/maps.css';
             document.body.appendChild(css);
 
+            document.querySelector('body').classList.add('account');
       });
     });
   },[]);

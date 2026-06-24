@@ -85,10 +85,12 @@ export default function Vouchers() {
             document.body.appendChild(css);
 
             document.querySelector('#contentSection form').forEach(f => {
-            f.addEventListener('submit', function (ev) {
-              ev.preventDefault();
-            })
-          });
+              f.addEventListener('submit', function (ev) {
+                ev.preventDefault();
+              });
+            });
+
+            document.querySelector('body').classList.add('account');
 
       });
     });

@@ -89,6 +89,8 @@ export default function UnsuscribeUser() {
               })
             });
 
+            document.querySelector('body').classList.add('account');
+
       });
     });
   },[]);
